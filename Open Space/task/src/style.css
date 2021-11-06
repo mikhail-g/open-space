@@ -8,6 +8,7 @@ body {
 .space {
     height: 100vh;
     width: 80%;
+    position: relative;
     /*background-color: midnightblue;*/
     background-image: url('public/space.png');
 }
@@ -39,4 +40,42 @@ body {
     left: 300px;
     z-index: 0;
     /*background-color: red;*/
+}
+
+.control-panel {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    top: 500px;
+    right: 100px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #282828;
+}
+
+.levers {
+    display: flex;
+    /*flex: 1 1 auto;*/
+}
+
+label {
+    /*background-color: darkkhaki;*/
+}
+
+.check-buttons,
+.levers {
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
+
+.range {
+    /*transform: rotate(90deg);*/
+    height: 130px;
+    width: 20px;
+    -webkit-appearance: slider-vertical;
+    background-color: darkgreen;
 }

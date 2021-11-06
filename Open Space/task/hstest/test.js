@@ -26,51 +26,143 @@ async function stageTest() {
         //testing structure of the page
         () => {
             let body = document.getElementsByTagName("body")[0];
-            if (!(body.children.length === 1 &&
+            if (!(body && body.children.length === 1 &&
                 body.children[0].tagName.toLowerCase() === 'div' &&
                 body.children[0].className === 'space')
-            ) return hs.wrong("There are some mismatches with suggested structure or naming")
+            ) return hs.wrong("There are some mismatches with suggested structure or elements naming")
 
             let space = body.children[0];
-            if (!(space.children.length === 1 &&
-                space.children[0].tagName.toLowerCase() === 'div' &&
-                space.children[0].className === 'planet-area')
-            ) return hs.wrong("There are some mismatches with suggested structure or naming")
+            if (!(space.children.length === 2 &&
+                space.children[0].tagName.toLowerCase() === 'div' && space.children[1].tagName.toLowerCase() === 'div' &&
+                ( space.children[0].className === 'planet-area' && space.children[1].className === 'control-panel' ||
+                    space.children[1].className === 'planet-area' && space.children[0].className === 'control-panel'))
+            ) return hs.wrong("There are some mismatches with suggested structure or elements naming on the space section level")
 
-            let planetArea = space.children[0];
-            if (!(planetArea.children.length === 2 &&
-                planetArea.children[0].tagName.toLowerCase() === 'img' &&
-                planetArea.children[1].tagName.toLowerCase() === 'img' && (
-                    planetArea.children[0].className === 'planet' && planetArea.children[1].className === 'rocket' ||
-                    planetArea.children[1].className === 'planet' && planetArea.children[0].className === 'rocket'))
-            ) return hs.wrong("There are some mismatches with suggested structure or naming")
+            let planetArea = document.getElementsByClassName('planet-area')
+            if (planetArea.length === 0) {
+                return hs.wrong("Can't find element with class=\"planet-area\"");
+            }
+            if (!(planetArea[0].children.length === 2 &&
+                planetArea[0].children[0].tagName.toLowerCase() === 'img' &&
+                planetArea[0].children[1].tagName.toLowerCase() === 'img' && (
+                    planetArea[0].children[0].className === 'planet' && planetArea[0].children[1].className === 'rocket' ||
+                    planetArea[0].children[1].className === 'planet' && planetArea[0].children[0].className === 'rocket'))
+            )return hs.wrong("There are some mismatches with suggested structure or elements naming in planet-area section")
+
+            let controlPanel = document.getElementsByClassName('control-panel');
+            if (controlPanel.length === 0) {
+                return hs.wrong("Can't find element with class=\"control-panel\"");
+            }
+            let controlPanelInner = controlPanel[0]
+            if (!(controlPanelInner.children.length === 5 &&
+                controlPanelInner.getElementsByTagName('input').length === 14 &&
+                controlPanelInner.getElementsByTagName('div').length === 2
+            )) return hs.wrong("There are some mismatches with suggested structure or elements naming in control-panel section")
 
             return hs.correct()
         },
         //#test2
-        //testing background
+        //testing types of the check-buttons inputs
         () => {
-            let space = document.body.getElementsByClassName("space");
-            if (space.length === 0) return hs.wrong("There no element with class='space'");
-
-            let spaceBg = window.getComputedStyle(space[0]).backgroundImage;
-            if (!spaceBg) return  hs.wrong("The element with class='space' should have background-image.");
+            let checkBtnsDiv = document.getElementsByClassName("check-buttons");
+            if (checkBtnsDiv.length === 0) {
+                return hs.wrong("Can't find element with class=\"check-buttons\"");
+            }
+            let checkBtns = Array.from(checkBtnsDiv[0].children);
+            checkBtns.forEach( el => {
+                if (el.tagName.toLowerCase() !== 'input' || el.type.toLowerCase() !== 'checkbox') {
+                    return hs.wrong('Each element in the check-buttons div should be an input with checkbox type')
+                }
+            })
 
             return hs.correct();
         },
         //#test3
-        //rocket should be above the planet
+        //testing types of the levers inputs
         () => {
-            const planet = document.body.getElementsByClassName("planet");
-            const rocket = document.body.getElementsByClassName("rocket");
+            let leversDiv = document.getElementsByClassName("levers");
+            if (leversDiv.length === 0) {
+                return hs.wrong("Can't find element with class=\"levers\"");
+            }
+            let leversInputs = Array.from(leversDiv[0].children);
+            leversInputs.forEach( el => {
+                if (el.tagName.toLowerCase() !== 'input' || el.type.toLowerCase() !== 'range') {
+                    return hs.wrong('Each element in the levers div should be an input with range type')
+                }
+            })
 
-            if (planet.length === 0) return hs.wrong("There no element with class='planet'");
-            if (rocket.length === 0) return hs.wrong("There no element with class='rocket'");
+            return hs.correct();
+        },
+        //#test4
+        //testing background of space
+        () => {
+            let space = document.getElementsByClassName("space");
+            if (space.length === 0) {
+                return hs.wrong("Can't find element with class=\"space\"");
+            }
+            let spaceBg = window.getComputedStyle(space[0]).backgroundImage;
+            if (!spaceBg) return hs.wrong("The element with class='space' should have background-image.");
 
-            const planetTop = parseInt(window.getComputedStyle(planet[0]).top);
-            const rocketTop = parseInt(window.getComputedStyle(rocket[0]).top);
+            return hs.correct();
+        },
+        //#test5
+        //panel top should be not lower then 1/3 of the space height
+        () => {
+            const controlDeck = document.body.getElementsByClassName("control-panel");
+            const space = document.body.getElementsByClassName("space");
 
-            if (planetTop > rocketTop + 300) return  hs.wrong("The rocket element is placed too low");
+            if (controlDeck.length === 0) return hs.wrong("There no element with class='control-panel'");
+            if (space.length === 0) return hs.wrong("There no element with class='space'");
+
+            const controlDeckTop = parseInt(window.getComputedStyle(controlDeck[0]).top);
+            const spaceHeight = space[0].scrollHeight
+
+            if (controlDeckTop < spaceHeight / 3) return  hs.wrong("The control panel element is placed too low");
+
+            return hs.correct();
+        },
+        //#test6
+        //testing background of the panel
+        () => {
+            let controlDeck = document.getElementsByClassName("control-panel");
+            if (controlDeck.length === 0) {
+                return hs.wrong("Can't find element with class=\"control-panel\"");
+            }
+            let controlDeckBgClr = window.getComputedStyle(controlDeck[0]).backgroundColor;
+            if (!controlDeckBgClr) return hs.wrong("The element with class='control-panel' should have background-color.");
+
+            return hs.correct();
+        },
+        //#test7
+        //testing positioning of check-buttons and levers
+        /*display: flex;
+    flex-direction: row;*/
+        () => {
+            let checkBtnsDiv = document.getElementsByClassName("check-buttons")[0];
+            let leversDiv = document.getElementsByClassName("levers")[0];
+
+            let checkBtnsDivStyles = window.getComputedStyle(checkBtnsDiv);
+            let leversDivStyles = window.getComputedStyle(leversDiv);
+
+            if (checkBtnsDivStyles.display.toLowerCase() !== 'flex' || leversDivStyles.display.toLowerCase() !== 'flex') {
+                return hs.wrong('Elements check-buttons and levers should have display: flex property.')
+            }
+
+            if (checkBtnsDivStyles.flexDirection.toLowerCase() !== 'row' || leversDivStyles.flexDirection.toLowerCase() !== 'row') {
+                return hs.wrong('Elements check-buttons and levers should be positioned in a row.')
+            }
+
+            return hs.correct();
+        },
+        //#test8
+        //testing that levers positioned vertical
+        () => {
+            let leversDiv = document.getElementsByClassName('levers')[0];
+            let levers = Array.from(leversDiv.getElementsByTagName('input'));
+            levers.forEach( lever => {
+                let leverStyle = window.getComputedStyle(lever);
+                if (!leverStyle.transform) return hs.wrong("All levers should be vertical.")
+            })
 
             return hs.correct();
         }
