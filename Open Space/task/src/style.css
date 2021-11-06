@@ -9,7 +9,6 @@ body {
     height: 100vh;
     width: 80%;
     position: relative;
-    /*background-color: midnightblue;*/
     background-image: url('public/space.png');
 }
 
@@ -18,7 +17,6 @@ body {
     width: 600px;
     position: absolute;
     bottom: 0;
-    /*background-color: #66cc66;*/
 
 }
 
@@ -28,7 +26,6 @@ body {
     position: absolute;
     bottom: 0;
     z-index: 1;
-    /*background-color: lightsalmon;*/
 }
 
 .rocket {
@@ -39,7 +36,6 @@ body {
     bottom: 270px;
     left: 300px;
     z-index: 0;
-    /*background-color: red;*/
 }
 
 .control-panel {
@@ -48,20 +44,40 @@ body {
     position: absolute;
     top: 500px;
     right: 100px;
+    padding: 20px;
     display: flex;
+    flex-flow: column;
+    justify-content: stretch;
+    align-items: stretch;
+    background-color:#269;
+    background-image: linear-gradient(white 2px, transparent 2px),
+    linear-gradient(90deg, white 2px, transparent 2px),
+    linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+    background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+}
+
+.control-panel__inner {
+    display: flex;
+    flex: 1 1 auto;
     flex-flow: column;
     justify-content: space-around;
     align-items: center;
     background-color: #282828;
 }
 
-.levers {
-    display: flex;
-    /*flex: 1 1 auto;*/
+
+#password {
+    border:3px dashed #db2b39;
+    border-radius: 10px;
+    color: #db2b39;
+    background-color: #f8d01c;
 }
 
-label {
-    /*background-color: darkkhaki;*/
+#confirm-password {
+    border-radius: 5px;
+    background-color: #f8d01c;
 }
 
 .check-buttons,
@@ -73,9 +89,15 @@ label {
 }
 
 .range {
-    /*transform: rotate(90deg);*/
     height: 130px;
     width: 20px;
     -webkit-appearance: slider-vertical;
     background-color: darkgreen;
+}
+
+#launch {
+    height: 50px;
+    width: 70px;
+    background-color: #db2b39;
+    border-radius: 50%;
 }
