@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    background-color: black;
+}
+
+.space {
+    height: 100vh;
+    width: 80%;
+    /*background-color: midnightblue;*/
+    background-image: url('public/space.png');
+}
+
+.planet-area {
+    height: 800px;
+    width: 600px;
+    position: absolute;
+    bottom: 0;
+    /*background-color: #66cc66;*/
+
+}
+
+.planet {
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    /*background-color: lightsalmon;*/
+}
+
+.rocket {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    transform: rotate(25deg);
+    bottom: 270px;
+    left: 300px;
+    z-index: 0;
+    /*background-color: red;*/
+}
