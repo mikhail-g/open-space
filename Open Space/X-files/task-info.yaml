@@ -273,6 +273,24 @@ files:
         }
     );
   learner_created: false
+- name: src/public/rocket.png
+  visible: true
+  learner_created: true
+- name: src/style.css
+  visible: true
+  learner_created: true
+- name: src/public/space.png
+  visible: true
+  learner_created: true
+- name: src/public/mars.png
+  visible: true
+  learner_created: true
+- name: src/listners.js
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/143/stages/774/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sun, 07 Nov 2021 19:58:37 UTC
 record: -1

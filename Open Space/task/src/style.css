@@ -43,6 +43,7 @@ body {
     width: 300px;
     position: absolute;
     top: 500px;
+    /*bottom: 100px;*/
     right: 100px;
     padding: 20px;
     display: flex;
@@ -95,9 +96,15 @@ body {
     background-color: darkgreen;
 }
 
+.range,
+.check {
+
+}
+
 #launch {
     height: 50px;
     width: 70px;
+    color: #f5f5f5;
     background-color: #db2b39;
     border-radius: 50%;
 }
