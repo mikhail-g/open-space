@@ -10,7 +10,7 @@
 <div class="space">
     <div class="planet-area">
         <img class="planet" src="public/mars.png" alt="planet Mars">
-        <img class="rocket" src="public/rocket.png" alt="rocket"
+        <img id="rocket" class="rocket" src="public/rocket.png" alt="rocket"
              width="512" height="512">
     </div>
     <div class="control-panel">
@@ -26,11 +26,11 @@
                 <input class="check" type="checkbox">
             </div>
             <div class="levers">
-                <input class="range" type="range">
-                <input class="range" type="range">
-                <input class="range" type="range">
-                <input class="range" type="range">
-                <input class="range" type="range">
+                <input class="range" type="range" max="100">
+                <input class="range" type="range" max="100">
+                <input class="range" type="range" max="100">
+                <input class="range" type="range" max="100">
+                <input class="range" type="range" max="100">
             </div>
             <input type="button" id="launch" value="Launch">
         </div>

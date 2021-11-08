@@ -42,8 +42,7 @@ body {
     height: 300px;
     width: 300px;
     position: absolute;
-    top: 500px;
-    /*bottom: 100px;*/
+    bottom: 100px;
     right: 100px;
     padding: 20px;
     display: flex;
